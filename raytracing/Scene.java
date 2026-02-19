@@ -5,6 +5,14 @@ import java.util.List;
 import model.Model;
 import utils.Vec3f;
 
+/**
+ * Represents the raytracing scene containing all models and light sources.
+ * The Scene class is responsible for ray casting, color computation, and rendering.
+ * It uses the Phong illumination model to compute lighting for each pixel.
+ * 
+ * @author KepsyIn
+ * @version 1.0
+ */
 public class Scene {
 	
 	private List<Model> modelList;
@@ -22,8 +30,12 @@ public class Scene {
 	
 	private static final double LAMBDA_MAX = Double.MAX_VALUE;
 	
-	private static final LightSource DEFAULT_LIGHT = new LightSource();
+	private static final LightSource DEFAULT_LIGHT = new LightSource(); 
 
+	/**
+	 * Creates an empty scene with default viewer position at origin.
+	 * Light sources and models must be added separately.
+	 */
 	public Scene() {
 		viewerPosition = DEFAULT_VIEWER_POS;
 		
@@ -32,6 +44,12 @@ public class Scene {
 		
 	}
 	
+	/**
+	 * Creates a scene with a light source and models.
+	 * 
+	 * @param lightSource The primary light source for the scene
+	 * @param model Variable number of Model objects to include in the scene
+	 */
 	public Scene( LightSource lightSource , Model... model) {
 		this();
 		for(Model m : model) {
@@ -39,6 +57,17 @@ public class Scene {
 		}
 	}
 	
+	/**
+	 * Computes the color of a pixel by tracing a ray through the scene.
+	 * Uses recursive ray tracing with reflection bounces to compute final pixel color.
+	 * Applies the Phong illumination model with ambient, diffuse, and specular components.
+	 * Implements shadow casting and reflection recursion up to specified level.
+	 * 
+	 * @param rayStart The starting point of the ray (camera position)
+	 * @param rayDirection The direction vector of the ray
+	 * @param niv The recursion level for reflections (decrements with each bounce)
+	 * @return A float array [R, G, B] with values in range [0, 1]
+	 */
 	public float[] findColor(Vec3f rayStart, Vec3f rayDirection, int niv) {
 		
 	    double lambdaMin = LAMBDA_MAX;
@@ -120,6 +149,16 @@ public class Scene {
 		
 	}
 	
+	/**
+	 * Applies anti-aliasing to an image by averaging samples per pixel.
+	 * (Currently not fully implemented in this version)
+	 * 
+	 * @param image The original image buffer
+	 * @param width The width of the image
+	 * @param height The height of the image
+	 * @param sample The number of samples per dimension (sample x sample total samples per pixel)
+	 * @return The anti-aliased image buffer
+	 */
 	public byte[] applyAntiAliasing(byte[] image, int width, int height, int sample) {
 	    byte[] newImage = new byte[image.length];
 
@@ -168,11 +207,13 @@ public class Scene {
 	}
 	
 	/**
-	 * draw with anti-aliasing
-	 * @param width
-	 * @param height
-	 * @param samples
-	 * @return
+	 * Renders the scene to a byte buffer with anti-aliasing (supersampling).
+	 * Multiple rays are cast per pixel in a grid pattern to reduce aliasing artifacts.
+	 * 
+	 * @param width The width of the output image in pixels
+	 * @param height The height of the output image in pixels
+	 * @param samples The number of samples per dimension (samples x samples total samples per pixel)
+	 * @return A byte buffer containing RGB values (3 bytes per pixel)
 	 */
 	public byte[] draw(int width, int height, int samples) {
 	    int D = DEFAULT_DISTANCE;
@@ -215,34 +256,77 @@ public class Scene {
 	    return buffer;
 	}
 	
+	/**
+	 * Renders the scene using default resolution (100x100 pixels).
+	 * 
+	 * @return A byte buffer containing the rendered image
+	 */
 	public byte[] draw() {
 		return this.draw(DEFAULT_SIZE, DEFAULT_SIZE);
 	}
 
+	/**
+	 * Gets the list of all models in this scene.
+	 * 
+	 * @return A List of Model objects
+	 */
 	public List<Model> getModelList() {
 		return modelList;
 	}
 
+	/**
+	 * Sets the list of all models in this scene.
+	 * 
+	 * @param modelList A List of Model objects to set
+	 */
 	public void setModelList(List<Model> modelList) {
 		this.modelList = modelList;
 	}
 	
+	/**
+	 * Adds a model to the scene.
+	 * 
+	 * @param m The Model object to add
+	 */
 	public void addModel( Model m ) {
 		this.modelList.add(m);
 	}
 	
+	/**
+	 * Adds a light source to the scene.
+	 * Multiple light sources can contribute to the scene's illumination.
+	 * 
+	 * @param l The LightSource object to add
+	 */
 	public void addLightSource( LightSource l ) {
 		this.lightSources.add(l);
 	}
 	
+	/**
+	 * Gets the list of all light sources in the scene.
+	 * 
+	 * @return A List of LightSource objects
+	 */
 	public List<LightSource> getLightSources(){
 		return this.lightSources;
 	}
 
+	/**
+	 * Gets the viewer/camera position in the scene.
+	 * This is the point from which rays are cast into the scene.
+	 * 
+	 * @return The Vec3f representing the viewer position
+	 */
 	public Vec3f getViewerPosition() {
 		return viewerPosition;
 	}
 	
+	/**
+	 * Clamps color component values to the valid range [0, 1].
+	 * Ensures all RGB values are within valid bounds after computation.
+	 * 
+	 * @param that The Vec3f color vector to clamp
+	 */
 	private void correctColor(Vec3f that) {
 	    that.x = Math.max(0, Math.min(1, that.x));
 	    that.y = Math.max(0, Math.min(1, that.y));

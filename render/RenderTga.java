@@ -1,15 +1,16 @@
 package render;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
-public class RenderTga
-{
+/**
+ * Implémentation du rendu d'image au format TGA.
+ * Hérite de ImageRenderer pour la structure commune.
+ */
+public class RenderTga extends ImageRenderer {
 
-    private static final String DEFAULT_FILENAME = "default_tga";
     private static final String DEFAULT_EXTENSION = "tga";
+    private static final String FORMAT_NAME = "TGA";
     
     // TGA File Header Constants
     private static final byte COMMENT_SIZE = 0;
@@ -68,26 +69,43 @@ public class RenderTga
     }
 
     /**
+     * Sauvegarde un buffer d'image en fichier TGA.
      * 
      * @param filename name of final TGA file
      * @param buffer buffer that contains the image. 3 bytes per pixel ordered this way : Blue, Green, Red
      * @param width Width of the image
      * @param height Height of the image
-     * @throws FileNotFoundException
-     * @throws UnsupportedEncodingException
      * @throws IOException 
      */
-    public static void saveTGA(String filename, byte buffer[], int width, int height) throws IOException, UnsupportedEncodingException {
+    @Override
+    public void save(String filename, byte buffer[], int width, int height) throws IOException {
 
         FileOutputStream fout = new FileOutputStream(new File(filename));
         TGAHeader header = new TGAHeader(width, height);
         
         writeTGAHeader(fout, header);
 
-        /* Write the buffer */
         fout.write(buffer);
 
         fout.close();
+    }
+
+    /**
+     * Méthode statique pour compatibilité avec l'ancien code.
+     */
+    public static void saveTGA(String filename, byte buffer[], int width, int height) throws IOException {
+        RenderTga renderer = new RenderTga();
+        renderer.save(filename, buffer, width, height);
+    }
+    
+    @Override
+    protected String getExtension() {
+        return DEFAULT_EXTENSION;
+    }
+    
+    @Override
+    protected String getFormatName() {
+        return FORMAT_NAME;
     }
 
 }
