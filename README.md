@@ -49,4 +49,6 @@ Get help:
 java -cp bin main -h
 ```
 
-The program generates a `raytracing_scene.tga` file with the rendered output.
+## Output
+
+The program returns a byte buffer containing the rendered image data. This buffer can be rendered/saved in various image formats, such as TGA files. By default, the program saves the output as `raytracing_scene.tga` (800x600 pixels with RGB color depth). 
