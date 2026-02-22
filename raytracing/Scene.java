@@ -6,12 +6,10 @@ import model.Model;
 import utils.Vec3f;
 
 /**
- * Represents the raytracing scene containing all models and light sources.
- * The Scene class is responsible for ray casting, color computation, and rendering.
- * It uses the Phong illumination model to compute lighting for each pixel.
+ * Represents the raytracing scene.
+ * Manages models, light sources and ray casting.
  * 
  * @author KepsyIn
- * @version 1.0
  */
 public class Scene {
 	
@@ -33,7 +31,7 @@ public class Scene {
 	private static final LightSource DEFAULT_LIGHT = new LightSource(); 
 
 	/**
-	 * Creates an empty scene with default viewer position at origin.
+	 * Creates an empty scene.
 	 * Light sources and models must be added separately.
 	 */
 	public Scene() {
@@ -47,8 +45,8 @@ public class Scene {
 	/**
 	 * Creates a scene with a light source and models.
 	 * 
-	 * @param lightSource The primary light source for the scene
-	 * @param model Variable number of Model objects to include in the scene
+	 * @param lightSource The primary light source
+	 * @param model Models to include
 	 */
 	public Scene( LightSource lightSource , Model... model) {
 		this();
@@ -58,15 +56,13 @@ public class Scene {
 	}
 	
 	/**
-	 * Computes the color of a pixel by tracing a ray through the scene.
-	 * Uses recursive ray tracing with reflection bounces to compute final pixel color.
-	 * Applies the Phong illumination model with ambient, diffuse, and specular components.
-	 * Implements shadow casting and reflection recursion up to specified level.
+	 * Computes the color of a pixel by ray tracing.
+	 * Uses recursive reflection and Phong illumination model.
 	 * 
-	 * @param rayStart The starting point of the ray (camera position)
-	 * @param rayDirection The direction vector of the ray
-	 * @param niv The recursion level for reflections (decrements with each bounce)
-	 * @return A float array [R, G, B] with values in range [0, 1]
+	 * @param rayStart Ray starting point
+	 * @param rayDirection Ray direction
+	 * @param niv Recursion level for reflections
+	 * @return [R, G, B] color values in range [0, 1]
 	 */
 	public float[] findColor(Vec3f rayStart, Vec3f rayDirection, int niv) {
 		
@@ -150,14 +146,13 @@ public class Scene {
 	}
 	
 	/**
-	 * Applies anti-aliasing to an image by averaging samples per pixel.
-	 * (Currently not fully implemented in this version)
+	 * Applies anti-aliasing by averaging samples per pixel.
 	 * 
-	 * @param image The original image buffer
-	 * @param width The width of the image
-	 * @param height The height of the image
-	 * @param sample The number of samples per dimension (sample x sample total samples per pixel)
-	 * @return The anti-aliased image buffer
+	 * @param image Original image buffer
+	 * @param width Image width
+	 * @param height Image height
+	 * @param sample Samples per dimension
+	 * @return Anti-aliased image buffer
 	 */
 	public byte[] applyAntiAliasing(byte[] image, int width, int height, int sample) {
 	    byte[] newImage = new byte[image.length];
@@ -207,13 +202,12 @@ public class Scene {
 	}
 	
 	/**
-	 * Renders the scene to a byte buffer with anti-aliasing (supersampling).
-	 * Multiple rays are cast per pixel in a grid pattern to reduce aliasing artifacts.
+	 * Renders the scene with anti-aliasing.
 	 * 
-	 * @param width The width of the output image in pixels
-	 * @param height The height of the output image in pixels
-	 * @param samples The number of samples per dimension (samples x samples total samples per pixel)
-	 * @return A byte buffer containing RGB values (3 bytes per pixel)
+	 * @param width Image width
+	 * @param height Image height
+	 * @param samples Samples per dimension
+	 * @return Rendered image buffer
 	 */
 	public byte[] draw(int width, int height, int samples) {
 	    int D = DEFAULT_DISTANCE;
@@ -257,27 +251,27 @@ public class Scene {
 	}
 	
 	/**
-	 * Renders the scene using default resolution (100x100 pixels).
+	 * Renders the scene with default resolution.
 	 * 
-	 * @return A byte buffer containing the rendered image
+	 * @return Rendered image buffer
 	 */
 	public byte[] draw() {
 		return this.draw(DEFAULT_SIZE, DEFAULT_SIZE);
 	}
 
 	/**
-	 * Gets the list of all models in this scene.
+	 * Gets the model list.
 	 * 
-	 * @return A List of Model objects
+	 * @return List of models
 	 */
 	public List<Model> getModelList() {
 		return modelList;
 	}
 
 	/**
-	 * Sets the list of all models in this scene.
+	 * Sets the model list.
 	 * 
-	 * @param modelList A List of Model objects to set
+	 * @param modelList List of models
 	 */
 	public void setModelList(List<Model> modelList) {
 		this.modelList = modelList;
@@ -286,7 +280,7 @@ public class Scene {
 	/**
 	 * Adds a model to the scene.
 	 * 
-	 * @param m The Model object to add
+	 * @param m The model to add
 	 */
 	public void addModel( Model m ) {
 		this.modelList.add(m);
@@ -294,38 +288,35 @@ public class Scene {
 	
 	/**
 	 * Adds a light source to the scene.
-	 * Multiple light sources can contribute to the scene's illumination.
 	 * 
-	 * @param l The LightSource object to add
+	 * @param l The light source to add
 	 */
 	public void addLightSource( LightSource l ) {
 		this.lightSources.add(l);
 	}
 	
 	/**
-	 * Gets the list of all light sources in the scene.
+	 * Gets the light sources.
 	 * 
-	 * @return A List of LightSource objects
+	 * @return List of light sources
 	 */
 	public List<LightSource> getLightSources(){
 		return this.lightSources;
 	}
 
 	/**
-	 * Gets the viewer/camera position in the scene.
-	 * This is the point from which rays are cast into the scene.
+	 * Gets the viewer position.
 	 * 
-	 * @return The Vec3f representing the viewer position
+	 * @return The viewer position
 	 */
 	public Vec3f getViewerPosition() {
 		return viewerPosition;
 	}
 	
 	/**
-	 * Clamps color component values to the valid range [0, 1].
-	 * Ensures all RGB values are within valid bounds after computation.
+	 * Clamps color values to [0, 1].
 	 * 
-	 * @param that The Vec3f color vector to clamp
+	 * @param that The color vector to clamp
 	 */
 	private void correctColor(Vec3f that) {
 	    that.x = Math.max(0, Math.min(1, that.x));

@@ -3,10 +3,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * Implémentation du rendu d'image au format TGA.
- * Hérite de ImageRenderer pour la structure commune.
- */
 public class RenderTga extends ImageRenderer {
 
     private static final String DEFAULT_EXTENSION = "tga";
@@ -24,9 +20,6 @@ public class RenderTga extends ImageRenderer {
     private static final byte BITS_PER_PIXEL = 24;
     private static final byte DESCRIPTOR = 0;
     
-    /**
-     * Inner class representing TGA file header configuration
-     */
     private static class TGAHeader {
         public final int width;
         public final int height;
@@ -37,22 +30,12 @@ public class RenderTga extends ImageRenderer {
         }
     }
     
-    /**
-     * 
-     * @param fout : output file stream
-     * @param s : short to write to disc in little endian
-     */
     private static void writeShort(FileOutputStream fout,int n) throws IOException
     {
         fout.write(n&255);
         fout.write((n>>8)&255);
     }
 
-    /**
-     * Write the TGA file header
-     * @param fout : output file stream
-     * @param header : TGA header configuration
-     */
     private static void writeTGAHeader(FileOutputStream fout, TGAHeader header) throws IOException {
         fout.write(COMMENT_SIZE);
         fout.write(COLORMAP_TYPE);
@@ -68,15 +51,6 @@ public class RenderTga extends ImageRenderer {
         fout.write(DESCRIPTOR);
     }
 
-    /**
-     * Sauvegarde un buffer d'image en fichier TGA.
-     * 
-     * @param filename name of final TGA file
-     * @param buffer buffer that contains the image. 3 bytes per pixel ordered this way : Blue, Green, Red
-     * @param width Width of the image
-     * @param height Height of the image
-     * @throws IOException 
-     */
     @Override
     public void save(String filename, byte buffer[], int width, int height) throws IOException {
 
@@ -90,9 +64,6 @@ public class RenderTga extends ImageRenderer {
         fout.close();
     }
 
-    /**
-     * Méthode statique pour compatibilité avec l'ancien code.
-     */
     public static void saveTGA(String filename, byte buffer[], int width, int height) throws IOException {
         RenderTga renderer = new RenderTga();
         renderer.save(filename, buffer, width, height);

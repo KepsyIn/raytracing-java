@@ -3,12 +3,10 @@ package model;
 import utils.Vec3f;
 
 /**
- * Represents a sphere (ball) in the 3D raytracing scene.
- * A sphere is defined by its radius and center point.
- * The sphere equation is: |P - center|² = radius²
+ * Represents a sphere in 3D raytracing scene.
+ * Defined by radius and center point.
  * 
  * @author KepsyIn
- * @version 1.0
  */
 public class Sphere extends Model{
 	
@@ -16,10 +14,10 @@ public class Sphere extends Model{
 	private Vec3f center;
 	
 	/**
-	 * Creates a new Sphere with the specified radius and center position.
+	 * Creates a sphere with radius and center.
 	 * 
-	 * @param rayon The radius of the sphere
-	 * @param center The center position of the sphere
+	 * @param rayon The radius
+	 * @param center The center position
 	 */
 	public Sphere( double rayon , Vec3f center ) {
 		super();
@@ -28,14 +26,11 @@ public class Sphere extends Model{
 	}
 
 	/**
-	 * Computes the intersection of a ray with this sphere.
-	 * Uses the quadratic formula: ax² + bx + c = 0
-	 * where a = |v|², b = 2(v·CP), c = |CP|² - r²
-	 * Returns the closest positive lambda value.
+	 * Computes ray-sphere intersection.
 	 * 
-	 * @param P The starting point of the ray
-	 * @param v The direction vector of the ray
-	 * @return The closest positive intersection distance lambda, or 0 if no intersection
+	 * @param P Ray starting point
+	 * @param v Ray direction
+	 * @return Closest positive intersection distance or 0 if none
 	 */
 	@Override
 	public double getIntersection(Vec3f P, Vec3f v) {
@@ -65,36 +60,36 @@ public class Sphere extends Model{
 	}
 
 	/**
-	 * Gets the radius of this sphere.
+	 * Gets the radius.
 	 * 
-	 * @return The radius value
+	 * @return The radius
 	 */
 	public double getRayon() {
 		return rayon;
 	}
 
 	/**
-	 * Sets the radius of this sphere.
+	 * Sets the radius.
 	 * 
-	 * @param rayon The new radius value
+	 * @param rayon The new radius
 	 */
 	public void setRayon(double rayon) {
 		this.rayon = rayon;
 	}
 
 	/**
-	 * Gets the center position of this sphere.
+	 * Gets the center position.
 	 * 
-	 * @return The Vec3f representing the center coordinates
+	 * @return The center coordinates
 	 */
 	public Vec3f getCenter() {
 		return center;
 	}
 
 	/**
-	 * Sets the center position of this sphere.
+	 * Sets the center position.
 	 * 
-	 * @param center The Vec3f representing the new center coordinates
+	 * @param center The new center coordinates
 	 */
 	public void setCenter(Vec3f center) {
 		this.center = center;

@@ -6,7 +6,9 @@ import raytracing.Scene;
 import utils.Vec3f;
 
 /**
- * Classe responsable de la création et de la gestion de toutes les scènes disponibles.
+ * Creates and manages all available scenes.
+ * 
+ * @author KepsyIn
  */
 public class SceneContainer {
 	

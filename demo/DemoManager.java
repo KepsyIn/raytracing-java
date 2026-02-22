@@ -4,8 +4,10 @@ import raytracing.Scene;
 import render.RenderTga;
 
 /**
- * Classe responsable de la gestion complète de la démonstration du raytracing.
- * Elle gère les arguments, affiche l'aide, lance le rendu et sauvegarde les fichiers.
+ * Manages raytracing demonstration.
+ * Handles arguments, help display, rendering and file saving.
+ * 
+ * @author KepsyIn
  */
 public class DemoManager {
 	
@@ -16,9 +18,9 @@ public class DemoManager {
 	private static final int SAMPLES = 4;
 	
 	/**
-	 * Lance la démonstration du raytracing en fonction des arguments fournis.
+	 * Starts the raytracing demonstration.
 	 * 
-	 * @param args Arguments de la ligne de commande
+	 * @param args Command line arguments
 	 */
 	public static void run(String[] args) {
 		if (args.length <= 0) {
@@ -40,7 +42,7 @@ public class DemoManager {
 	}
 	
 	/**
-	 * Affiche l'aide avec la liste de toutes les scènes disponibles.
+	 * Displays help with available scenes.
 	 */
 	private static void displayHelp() {
 		System.out.println("> the program takes one argument <number_of_the_scene> you want to generate.");
@@ -52,9 +54,9 @@ public class DemoManager {
 	}
 	
 	/**
-	 * Génère et rend la scène demandée.
+	 * Renders the requested scene.
 	 * 
-	 * @param sceneNumber Le numéro de la scène à créer
+	 * @param sceneNumber The scene number to render
 	 */
 	private static void renderScene(int sceneNumber) {
 		Scene scene = SceneContainer.buildScene1();
@@ -96,9 +98,9 @@ public class DemoManager {
 	}
 	
 	/**
-	 * Affiche un message d'erreur sur la sortie d'erreur standard.
+	 * Displays an error message.
 	 * 
-	 * @param message Le message d'erreur à afficher
+	 * @param message The error message
 	 */
 	private static void printError(String message) {
 		System.err.println(message);

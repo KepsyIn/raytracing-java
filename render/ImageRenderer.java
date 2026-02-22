@@ -2,35 +2,37 @@ package render;
 import java.io.IOException;
 
 /**
- * Classe abstraite responsable de la sauvegarde d'images.
- * Fournit une interface commune pour les différents formats d'image (TGA, PNG, etc.)
+ * Abstract class for image saving.
+ * Provides interface for different image formats (TGA, PNG, etc.)
+ * 
+ * @author KepsyIn
  */
 public abstract class ImageRenderer {
 	
 	protected static final String DEFAULT_FILENAME = "default_image";
 	
 	/**
-	 * Sauvegarde un buffer d'image dans le format spécifié par l'implémentation.
+	 * Saves image buffer to file.
 	 * 
-	 * @param filename Nom du fichier à créer
-	 * @param buffer Buffer contenant l'image. 3 bytes par pixel ordonnés ainsi : Blue, Green, Red
-	 * @param width Largeur de l'image
-	 * @param height Hauteur de l'image
-	 * @throws IOException Si une erreur d'I/O se produit
+	 * @param filename The filename
+	 * @param buffer Image buffer (3 bytes per pixel: Blue, Green, Red)
+	 * @param width Image width
+	 * @param height Image height
+	 * @throws IOException If I/O error occurs
 	 */
 	public abstract void save(String filename, byte buffer[], int width, int height) throws IOException;
 	
 	/**
-	 * Retourne l'extension du fichier de ce format.
+	 * Gets the file extension for this format.
 	 * 
-	 * @return L'extension du fichier (ex: "tga", "png")
+	 * @return The file extension
 	 */
 	protected abstract String getExtension();
 	
 	/**
-	 * Retourne le nom du format pour l'affichage.
+	 * Gets the format name for display.
 	 * 
-	 * @return Le nom du format (ex: "TGA", "PNG")
+	 * @return The format name
 	 */
 	protected abstract String getFormatName();
 }

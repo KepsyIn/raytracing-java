@@ -3,12 +3,10 @@ package model;
 import utils.Vec3f;
 
 /**
- * Represents a planar surface (infinite plane) in the 3D raytracing scene.
- * A plane is defined by a point and a normal vector.
- * Planes are used to create walls, floors, and other flat surfaces.
+ * Represents a planar surface in 3D raytracing scene.
+ * Defined by a point and normal vector.
  * 
  * @author KepsyIn
- * @version 1.0
  */
 public class Plan extends Model {
 	
@@ -17,10 +15,10 @@ public class Plan extends Model {
 	public Vec3f point;
 	
 	/**
-	 * Creates a new Plan with the specified point and normal vector.
+	 * Creates a plane with a point and normal vector.
 	 * 
 	 * @param A A point on the plane
-	 * @param normal The normal vector to the plane
+	 * @param normal The normal vector
 	 */
 	public Plan(Vec3f A , Vec3f normal ) {
 		super();
@@ -29,13 +27,11 @@ public class Plan extends Model {
 	}
 
 	/**
-	 * Computes the intersection of a ray with this plane.
-	 * Uses the mathematical formula: lambda = (A·N - P·N) / (V·N)
-	 * where A is a point on the plane, P is ray start, V is ray direction, and N is the normal.
+	 * Computes ray-plane intersection.
 	 * 
-	 * @param P The starting point of the ray
-	 * @param v The direction vector of the ray
-	 * @return The intersection distance (lambda) if positive, -1 if no intersection
+	 * @param P Ray starting point
+	 * @param v Ray direction
+	 * @return Intersection distance or -1 if no intersection
 	 */
 	@Override
 	public double getIntersection(Vec3f P, Vec3f v) {
@@ -56,46 +52,45 @@ public class Plan extends Model {
 	}
 	
 	/**
-	 * Gets the normal vector of this plane.
-	 * The normal is constant across all points on an infinite plane.
+	 * Gets the normal vector.
 	 * 
-	 * @return The normal vector of the plane
+	 * @return The normal vector
 	 */
 	public Vec3f getNormal() {
 		return normal;
 	}
 	
 	/**
-	 * Gets the normal vector of this plane at a specific point.
-	 * For a plane, the normal is constant everywhere, so the point parameter is ignored.
+	 * Gets the normal vector at a point.
+	 * Normal is constant for planes.
 	 * 
-	 * @param P A point (not used for planes since normal is constant)
-	 * @return The normal vector of the plane
+	 * @param P A point (unused)
+	 * @return The normal vector
 	 */
 	public Vec3f getNormal(Vec3f P ) {
 		return normal;
 	}
 
 	/**
-	 * Sets the normal vector of this plane.
+	 * Sets the normal vector.
 	 * 
-	 * @param normal The new normal vector for the plane
+	 * @param normal The new normal vector
 	 */
 	public void setNormal(Vec3f normal) {
 		this.normal = normal;
 	}
 
 	/**
-	 * Gets a point that lies on this plane.
+	 * Gets a point on the plane.
 	 * 
-	 * @return A Vec3f representing a point on the plane
+	 * @return A point on the plane
 	 */
 	public Vec3f getPoint() {
 		return point;
 	}
 
 	/**
-	 * Sets the point that defines this plane.
+	 * Sets the point defining the plane.
 	 * 
 	 * @param point A point on the plane
 	 */

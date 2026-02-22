@@ -4,11 +4,9 @@ import utils.Vec3f;
 
 /**
  * Represents a point light source in the raytracing scene.
- * A light source has ambient, diffuse, and specular components that contribute to the
- * illumination of objects in the scene using the Phong lighting model.
+ * Uses Phong lighting model with ambient, diffuse, and specular components.
  * 
  * @author KepsyIn
- * @version 1.0
  */
 public class LightSource {
 	
@@ -25,13 +23,13 @@ public class LightSource {
 	public static final Vec3f DEFAULT_SPECULAR = new Vec3f(1,1,1);
 		
 	/**
-	 * Creates a light source with full customization of all components.
+	 * Creates a light with all components customized.
 	 * 
-	 * @param color The primary color of the light
-	 * @param position The 3D position of the light source
-	 * @param ambient The ambient light component (affects unlit areas)
-	 * @param diffuse The diffuse light component (affects direct lighting)
-	 * @param specular The specular light component (affects reflections)
+	 * @param color The light color
+	 * @param position The 3D position
+	 * @param ambient Ambient component
+	 * @param diffuse Diffuse component
+	 * @param specular Specular component
 	 */
 	public LightSource(Vec3f color ,Vec3f position, Vec3f ambient, Vec3f diffuse, Vec3f specular) {
 		this.color = color;
@@ -42,17 +40,18 @@ public class LightSource {
 	}
 	
 	/**
-	 * Creates a light source with default components using default values.
+	 * Creates a light with default components.
 	 */
 	public LightSource() {
 		this(DEFAULT_COLOR,DEFAULT_POSITION,DEFAULT_AMBIENT,DEFAULT_DIFFUSE,DEFAULT_SPECULAR);
 	}
 	
 	/**
-	 * Creates a light source with color and position, using default ambient, diffuse, and specular components.
+	 * Creates a light with color and position.
+	 * Uses default ambient, diffuse, and specular components.
 	 * 
-	 * @param color The primary color of the light
-	 * @param position The 3D position of the light source
+	 * @param color The light color
+	 * @param position The 3D position
 	 */
 	public LightSource(Vec3f color , Vec3f position ) {
 		this(color,position,DEFAULT_AMBIENT,DEFAULT_DIFFUSE,DEFAULT_SPECULAR);
@@ -60,9 +59,8 @@ public class LightSource {
 
 	/**
 	 * Gets the ambient light component.
-	 * Ambient light affects areas that are not directly illuminated.
 	 * 
-	 * @return The ambient light color vector
+	 * @return The ambient light color
 	 */
 	public Vec3f getAmbient() {
 		return ambient;
@@ -71,25 +69,25 @@ public class LightSource {
 	/**
 	 * Sets the ambient light component.
 	 * 
-	 * @param ambient The ambient light color vector to set
+	 * @param ambient The ambient light color
 	 */
 	public void setAmbient(Vec3f ambient) {
 		this.ambient = ambient;
 	}
 
 	/**
-	 * Gets the position of this light source.
+	 * Gets the position.
 	 * 
-	 * @return The 3D position vector of the light source
+	 * @return The 3D position
 	 */
 	public Vec3f getPosition() {
 		return position;
 	}
 
 	/**
-	 * Sets the position of this light source.
+	 * Sets the position.
 	 * 
-	 * @param position The 3D position vector to set
+	 * @param position The 3D position
 	 */
 	public void setPosition(Vec3f position) {
 		this.position = position;
@@ -97,7 +95,6 @@ public class LightSource {
 
 	/**
 	 * Gets the diffuse light component.
-	 * Diffuse light affects the main illumination of objects facing the light.
 	 * 
 	 * @return The diffuse light color vector
 	 */
