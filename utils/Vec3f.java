@@ -3,8 +3,6 @@ package utils;
 /**
  * 3D vector with float components.
  * Provides vector operations: addition, subtraction, scaling, dot/cross products.
- * 
- * @author KepsyIn
  */
 public class Vec3f
 {
