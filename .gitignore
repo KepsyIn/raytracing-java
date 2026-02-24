@@ -1,0 +1,7 @@
+
+# .class file
+.bin
+
+
+# Output tga file
+.*.tga
