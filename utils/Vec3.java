@@ -4,7 +4,7 @@ package utils;
  * 3D vector with float components.
  * Provides vector operations: addition, subtraction, scaling, dot/cross products.
  */
-public class Vec3f
+public class Vec3
 {
 
 	public float x,y,z;
@@ -12,7 +12,7 @@ public class Vec3f
 	/**
 	 * Default Constructor
 	 */
-	public Vec3f()
+	public Vec3()
 	{
 		this.x=this.y=this.z=0.F;
 	}
@@ -21,7 +21,7 @@ public class Vec3f
 	 * Constructor with initialisation
 	 * @param x,y,z values to place into current vector
 	 */
-	public Vec3f(final float x,final float y,final float z)
+	public Vec3(final float x,final float y,final float z)
 	{
 		this.x=x;
 		this.y=y;
@@ -32,7 +32,7 @@ public class Vec3f
 	 * Constructor by copy
 	 * @param that vector to be copied in current vector
 	 */
-	public Vec3f(final Vec3f that)
+	public Vec3(final Vec3 that)
 	{
 		this.x=that.x;
 		this.y=that.y;
@@ -43,7 +43,7 @@ public class Vec3f
 	 * Set current vector's value to 0.0
 	 * @return current vector
 	 */
-	public Vec3f reset()
+	public Vec3 reset()
 	{
 		this.x=this.y=this.z=0.F;
 		return this;
@@ -54,7 +54,7 @@ public class Vec3f
 	 * @param that vector to be copied
 	 * @return current vector
 	 */
-	public Vec3f set(final Vec3f that)
+	public Vec3 set(final Vec3 that)
 	{
 		this.x=that.x;
 		this.y=that.y;
@@ -67,7 +67,7 @@ public class Vec3f
 	 * @param x,y,z values to place into current vector
 	 * @return current vector
 	 */
-	public Vec3f set(final float x,final float y,final float z)
+	public Vec3 set(final float x,final float y,final float z)
 	{
 		this.x=x;
 		this.y=y;
@@ -94,7 +94,7 @@ public class Vec3f
 	 * Normalize current vector
 	 * @return current vector
 	 */
-	public Vec3f normalize()
+	public Vec3 normalize()
 	{
 		float l=this.lengthSquare();
 		if (l==0.F) return this;
@@ -109,7 +109,7 @@ public class Vec3f
 	 * @param that The vector to add
 	 * @return This vector after the operation
 	 */
-	public Vec3f add(final Vec3f that)
+	public Vec3 add(final Vec3 that)
 	{
 		this.x+=that.x;
 		this.y+=that.y;
@@ -125,7 +125,7 @@ public class Vec3f
 	 * @param v2 The second vector
 	 * @return This vector after the operation
 	 */
-	public Vec3f setAdd(final Vec3f v1, final Vec3f v2)
+	public Vec3 setAdd(final Vec3 v1, final Vec3 v2)
 	{
 		this.x=v1.x+v2.x;
 		this.y=v1.y+v2.y;
@@ -140,7 +140,7 @@ public class Vec3f
 	 * @param that The vector to subtract
 	 * @return This vector after the operation
 	 */
-	public Vec3f sub(final Vec3f that)
+	public Vec3 sub(final Vec3 that)
 	{
 		this.x-=that.x;
 		this.y-=that.y;
@@ -156,7 +156,7 @@ public class Vec3f
 	 * @param v2 The second vector (subtrahend)
 	 * @return This vector after the operation
 	 */
-	public Vec3f setSub(final Vec3f v1,final Vec3f v2)
+	public Vec3 setSub(final Vec3 v1,final Vec3 v2)
 	{
 		this.x=v1.x-v2.x;
 		this.y=v1.y-v2.y;
@@ -171,7 +171,7 @@ public class Vec3f
 	 * @param scale The scaling factor to multiply by
 	 * @return This vector after the operation
 	 */
-	public Vec3f scale(final float scale)
+	public Vec3 scale(final float scale)
 	{
 		this.x*=scale;
 		this.y*=scale;
@@ -188,7 +188,7 @@ public class Vec3f
 	 * @param scalez The scaling factor for the z component
 	 * @return This vector after the operation
 	 */
-	public Vec3f scale(final float scalex,final float scaley,final float scalez)
+	public Vec3 scale(final float scalex,final float scaley,final float scalez)
 	{
 		this.x*=scalex;
 		this.y*=scaley;
@@ -204,7 +204,7 @@ public class Vec3f
 	 * @param that The vector to scale
 	 * @return This vector after the operation
 	 */
-	public Vec3f setScale(final float scale,final Vec3f that)
+	public Vec3 setScale(final float scale,final Vec3 that)
 	{
 		this.x=scale*that.x;
 		this.y=scale*that.y;
@@ -220,7 +220,7 @@ public class Vec3f
 	 * @param v2 The second vector
 	 * @return This vector after the operation
 	 */
-	public Vec3f setScale(final Vec3f v1,final Vec3f v2)
+	public Vec3 setScale(final Vec3 v1,final Vec3 v2)
 	{
 		this.x=v1.x*v2.x;
 		this.y=v1.y*v2.y;
@@ -236,7 +236,7 @@ public class Vec3f
 	 * @param that The vector to scale and add
 	 * @return This vector after the operation
 	 */
-	public Vec3f addScale(final float scale,final Vec3f that)
+	public Vec3 addScale(final float scale,final Vec3 that)
 	{
 		this.x+=scale*that.x;
 		this.y+=scale*that.y;
@@ -252,7 +252,7 @@ public class Vec3f
 	 * @param v The vector to multiply
 	 * @return This vector after the operation
 	 */
-	public Vec3f setMatMultiply(final float[] mat,final Vec3f v)
+	public Vec3 setMatMultiply(final float[] mat,final Vec3 v)
 	{
 		this.x=mat[0]*v.x+mat[1]*v.y+mat[2]*v.z;
 		this.y=mat[3]*v.x+mat[4]*v.y+mat[5]*v.z;
@@ -268,7 +268,7 @@ public class Vec3f
 	 * @param v The vector to multiply
 	 * @return This vector after the operation
 	 */
-	public Vec3f setTransposeMatMultiply(final float[] mat,final Vec3f v)
+	public Vec3 setTransposeMatMultiply(final float[] mat,final Vec3 v)
 	{
 		this.x=mat[0]*v.x+mat[3]*v.y+mat[6]*v.z;
 		this.y=mat[1]*v.x+mat[4]*v.y+mat[7]*v.z;
@@ -284,7 +284,7 @@ public class Vec3f
 	 * @param v The vector to compute dot product with
 	 * @return The dot product as a float
 	 */
-	public float dotProduct(final Vec3f v)
+	public float dotProduct(final Vec3 v)
 	{
 		return this.x*v.x+this.y*v.y+this.z*v.z;
 	}
@@ -298,7 +298,7 @@ public class Vec3f
 	 * @param v2 The second vector
 	 * @return This vector after the operation
 	 */
-	public Vec3f setCrossProduct(final Vec3f v1,final Vec3f v2)
+	public Vec3 setCrossProduct(final Vec3 v1,final Vec3 v2)
 	{
 		this.x=v1.y*v2.z-v1.z*v2.y;
 		this.y=v1.z*v2.x-v1.x*v2.z;

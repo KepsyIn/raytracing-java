@@ -14,7 +14,7 @@ raytracing-java/
 ├── raytracing/      # Core ray tracing engine (Scene, LightSource)
 ├── render/          # Image export (RenderTga)
 ├── demo/            # Scene creation and management
-├── utils/           # Vector mathematics (Vec3f)
+├── utils/           # Vector mathematics (Vec3)
 └── main.java        # Application entry point
 ```
 

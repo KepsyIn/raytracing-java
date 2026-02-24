@@ -1,6 +1,6 @@
 package model;
 
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Represents a planar surface in 3D raytracing scene.
@@ -10,9 +10,9 @@ import utils.Vec3f;
  */
 public class Plan extends Model {
 	
-	public Vec3f normal;
+	public Vec3 normal;
 
-	public Vec3f point;
+	public Vec3 point;
 	
 	/**
 	 * Creates a plane with a point and normal vector.
@@ -20,7 +20,7 @@ public class Plan extends Model {
 	 * @param A A point on the plane
 	 * @param normal The normal vector
 	 */
-	public Plan(Vec3f A , Vec3f normal ) {
+	public Plan(Vec3 A , Vec3 normal ) {
 		super();
 		this.point = A;
 		this.normal = normal;
@@ -34,12 +34,12 @@ public class Plan extends Model {
 	 * @return Intersection distance or -1 if no intersection
 	 */
 	@Override
-	public double getIntersection(Vec3f P, Vec3f v) {
+	public double getIntersection(Vec3 P, Vec3 v) {
         
-        double AdotN = new Vec3f(point).dotProduct(normal);
-        double PdotN = new Vec3f(P).dotProduct(normal);
+        double AdotN = new Vec3(point).dotProduct(normal);
+        double PdotN = new Vec3(P).dotProduct(normal);
         
-        double VdotN = new Vec3f(v).dotProduct(normal);
+        double VdotN = new Vec3(v).dotProduct(normal);
         
         if( VdotN < 0 ) {
         	double lambda = (AdotN - PdotN) / VdotN;
@@ -56,7 +56,7 @@ public class Plan extends Model {
 	 * 
 	 * @return The normal vector
 	 */
-	public Vec3f getNormal() {
+	public Vec3 getNormal() {
 		return normal;
 	}
 	
@@ -67,7 +67,7 @@ public class Plan extends Model {
 	 * @param P A point (unused)
 	 * @return The normal vector
 	 */
-	public Vec3f getNormal(Vec3f P ) {
+	public Vec3 getNormal(Vec3 P ) {
 		return normal;
 	}
 
@@ -76,7 +76,7 @@ public class Plan extends Model {
 	 * 
 	 * @param normal The new normal vector
 	 */
-	public void setNormal(Vec3f normal) {
+	public void setNormal(Vec3 normal) {
 		this.normal = normal;
 	}
 
@@ -85,7 +85,7 @@ public class Plan extends Model {
 	 * 
 	 * @return A point on the plane
 	 */
-	public Vec3f getPoint() {
+	public Vec3 getPoint() {
 		return point;
 	}
 
@@ -94,7 +94,7 @@ public class Plan extends Model {
 	 * 
 	 * @param point A point on the plane
 	 */
-	public void setPoint(Vec3f point) {
+	public void setPoint(Vec3 point) {
 		this.point = point;
 	}
 

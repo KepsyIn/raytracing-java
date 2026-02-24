@@ -3,7 +3,7 @@ import model.Plan;
 import model.Sphere;
 import raytracing.LightSource;
 import raytracing.Scene;
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Creates and manages all available scenes.
@@ -13,36 +13,36 @@ import utils.Vec3f;
 public class SceneContainer {
 	
 	public static Scene buildScene1() {
-		Sphere sphere = new Sphere(1, new Vec3f(3,0,-15));
-		Sphere otherSphere = new Sphere(1, new Vec3f(0,0,-10));
+		Sphere sphere = new Sphere(1, new Vec3(3,0,-15));
+		Sphere otherSphere = new Sphere(1, new Vec3(0,0,-10));
 		
 		otherSphere.setReflexionCoeff(1);
 		sphere.setReflexionCoeff(0.5f);
 		
-		Plan backPlan = new Plan(new Vec3f(0,0,-50), new Vec3f(0,0,1));
+		Plan backPlan = new Plan(new Vec3(0,0,-50), new Vec3(0,0,1));
 		
-		Plan planBehind = new Plan(new Vec3f(0,0,10), new Vec3f( 0,0,-1));
-		Plan leftWall = new Plan(new Vec3f(-18,0,0), new Vec3f(1,0,0));
+		Plan planBehind = new Plan(new Vec3(0,0,10), new Vec3( 0,0,-1));
+		Plan leftWall = new Plan(new Vec3(-18,0,0), new Vec3(1,0,0));
 		
 		leftWall.setReflexionCoeff(0.5f);
 		
-		Plan rightWall = new Plan(new Vec3f(18,0,0), new Vec3f(-1,0,0));
-		Plan floor = new Plan(new Vec3f(0,-10,0), new Vec3f(0,1,0));
-		Plan ceiling = new Plan(new Vec3f(0,10,0), new Vec3f(0,-1,0));
+		Plan rightWall = new Plan(new Vec3(18,0,0), new Vec3(-1,0,0));
+		Plan floor = new Plan(new Vec3(0,-10,0), new Vec3(0,1,0));
+		Plan ceiling = new Plan(new Vec3(0,10,0), new Vec3(0,-1,0));
 		
-		Vec3f color = new Vec3f(0,0,1f);
+		Vec3 color = new Vec3(0,0,1f);
 		
 		sphere.setColor(color);
 		
 		Scene scene_test = new Scene();
 		
-		scene_test.addLightSource(new LightSource(new Vec3f(1,1,1),new Vec3f(10,1,1)));
+		scene_test.addLightSource(new LightSource(new Vec3(1,1,1),new Vec3(10,1,1)));
 		
-		backPlan.setColor(new Vec3f(0,1,0));
-		leftWall.setColor(new Vec3f(0,0,0));
-		rightWall.setColor(new Vec3f(1,0,0));
-		ceiling.setColor(new Vec3f(0.8f,1,0));
-		floor.setColor(new Vec3f(0.8f,1,0));
+		backPlan.setColor(new Vec3(0,1,0));
+		leftWall.setColor(new Vec3(0,0,0));
+		rightWall.setColor(new Vec3(1,0,0));
+		ceiling.setColor(new Vec3(0.8f,1,0));
+		floor.setColor(new Vec3(0.8f,1,0));
 			
 		scene_test.addModel(sphere);
 		scene_test.addModel(otherSphere);
@@ -58,10 +58,10 @@ public class SceneContainer {
 	
 	public static Scene buildScene2() {
 		Scene scene = new Scene();
-		scene.addLightSource(new LightSource(new Vec3f(1,1,1), new Vec3f(-10,5,5)));
+		scene.addLightSource(new LightSource(new Vec3(1,1,1), new Vec3(-10,5,5)));
 		
-		Sphere blue_sphere = new Sphere(1,new Vec3f(0,0,-4));
-		blue_sphere.setColor(new Vec3f(1,0,0));
+		Sphere blue_sphere = new Sphere(1,new Vec3(0,0,-4));
+		blue_sphere.setColor(new Vec3(1,0,0));
 		
 		scene.addModel(blue_sphere);
 		
@@ -71,14 +71,14 @@ public class SceneContainer {
 	public static Scene buildScene3() {
 		Scene scene = new Scene();
 		
-		scene.addLightSource(new LightSource(new Vec3f(1,1,1) , new Vec3f(10,0,0)));
-		scene.addLightSource(new LightSource(new Vec3f(1,1,1) , new Vec3f(-10,0,0)));
+		scene.addLightSource(new LightSource(new Vec3(1,1,1) , new Vec3(10,0,0)));
+		scene.addLightSource(new LightSource(new Vec3(1,1,1) , new Vec3(-10,0,0)));
 		
-		Plan backPlan = new Plan(new Vec3f(0,0,-40), new Vec3f(0,0,1));
-		backPlan.setColor(new Vec3f(0.8f,0.2f,0.2f));
+		Plan backPlan = new Plan(new Vec3(0,0,-40), new Vec3(0,0,1));
+		backPlan.setColor(new Vec3(0.8f,0.2f,0.2f));
 		
-		Sphere sphere = new Sphere(2,new Vec3f(0,0,-10));
-		sphere.setColor(new Vec3f(0,0.8f,0.8f));
+		Sphere sphere = new Sphere(2,new Vec3(0,0,-10));
+		sphere.setColor(new Vec3(0,0.8f,0.8f));
 		
 		scene.addModel(sphere);
 		scene.addModel(backPlan);
@@ -88,23 +88,23 @@ public class SceneContainer {
 	
 	public static Scene buildScene4() {
 		Scene scene = new Scene();
-		scene.addLightSource(new LightSource(new Vec3f(1,1,1), new Vec3f(0,7,0)));
+		scene.addLightSource(new LightSource(new Vec3(1,1,1), new Vec3(0,7,0)));
 		
-		Sphere sphere = new Sphere(1, new Vec3f(0,0,-10));
-		sphere.setColor(new Vec3f(0,0,0));
+		Sphere sphere = new Sphere(1, new Vec3(0,0,-10));
+		sphere.setColor(new Vec3(0,0,0));
 		sphere.setReflexionCoeff(1);
 		
-		Sphere sphereLeft = new Sphere(1,new Vec3f(-3,0,-11));
-		sphereLeft.setColor(new Vec3f(0.5f,0,0));
+		Sphere sphereLeft = new Sphere(1,new Vec3(-3,0,-11));
+		sphereLeft.setColor(new Vec3(0.5f,0,0));
 		sphereLeft.setReflexionCoeff(1);
 		
-		Sphere sphereRight = new Sphere(1,new Vec3f(3,0,-11));
-		sphereRight.setColor(new Vec3f(0,0,0.5f));
+		Sphere sphereRight = new Sphere(1,new Vec3(3,0,-11));
+		sphereRight.setColor(new Vec3(0,0,0.5f));
 		sphereRight.setReflexionCoeff(1);
 		
-		Plan floor = new Plan(new Vec3f(0,-1,0),new Vec3f(0,1,0));
+		Plan floor = new Plan(new Vec3(0,-1,0),new Vec3(0,1,0));
 		floor.setReflexionCoeff(0.2f);
-		floor.setColor(new Vec3f(0.5f,0.5f,0));
+		floor.setColor(new Vec3(0.5f,0.5f,0));
 		
 		scene.addModel(sphere);
 		scene.addModel(floor);
@@ -117,13 +117,13 @@ public class SceneContainer {
 	public static Scene buildScene5() {
 		Scene scene = new Scene();
 		
-		scene.addLightSource(new LightSource(new Vec3f(1,1,1),new Vec3f(0,10,-10)));
+		scene.addLightSource(new LightSource(new Vec3(1,1,1),new Vec3(0,10,-10)));
 		
-		Sphere sphere = new Sphere(1,new Vec3f(0,0,-10));
-		sphere.setColor(new Vec3f(0.1f,0.8f,0.6f));
+		Sphere sphere = new Sphere(1,new Vec3(0,0,-10));
+		sphere.setColor(new Vec3(0.1f,0.8f,0.6f));
 		
-		Plan floor = new Plan(new Vec3f(0,-1,0),new Vec3f(0,1,0));
-		floor.setColor(new Vec3f(0,0,0));
+		Plan floor = new Plan(new Vec3(0,-1,0),new Vec3(0,1,0));
+		floor.setColor(new Vec3(0,0,0));
 		floor.setReflexionCoeff(1);
 		
 		scene.addModel(floor);

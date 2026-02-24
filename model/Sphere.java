@@ -1,6 +1,6 @@
 package model;
 
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Represents a sphere in 3D raytracing scene.
@@ -11,7 +11,7 @@ import utils.Vec3f;
 public class Sphere extends Model{
 	
 	private double rayon;
-	private Vec3f center;
+	private Vec3 center;
 	
 	/**
 	 * Creates a sphere with radius and center.
@@ -19,7 +19,7 @@ public class Sphere extends Model{
 	 * @param rayon The radius
 	 * @param center The center position
 	 */
-	public Sphere( double rayon , Vec3f center ) {
+	public Sphere( double rayon , Vec3 center ) {
 		super();
 		this.center = center;
 		this.rayon = rayon;
@@ -33,10 +33,10 @@ public class Sphere extends Model{
 	 * @return Closest positive intersection distance or 0 if none
 	 */
 	@Override
-	public double getIntersection(Vec3f P, Vec3f v) {
+	public double getIntersection(Vec3 P, Vec3 v) {
 		
-		double alpha = new Vec3f(v).dotProduct(v);
-		Vec3f CP = new Vec3f().setSub(P, center);
+		double alpha = new Vec3(v).dotProduct(v);
+		Vec3 CP = new Vec3().setSub(P, center);
 		
 		double beta = v.dotProduct(CP);
 		
@@ -82,7 +82,7 @@ public class Sphere extends Model{
 	 * 
 	 * @return The center coordinates
 	 */
-	public Vec3f getCenter() {
+	public Vec3 getCenter() {
 		return center;
 	}
 
@@ -91,7 +91,7 @@ public class Sphere extends Model{
 	 * 
 	 * @param center The new center coordinates
 	 */
-	public void setCenter(Vec3f center) {
+	public void setCenter(Vec3 center) {
 		this.center = center;
 	}
 	
@@ -104,8 +104,8 @@ public class Sphere extends Model{
 	 * @return The normalized normal vector at point P
 	 */
 	@Override	
-	public Vec3f getNormal(Vec3f P) {
-		Vec3f normal = new Vec3f(P).sub(this.center);
+	public Vec3 getNormal(Vec3 P) {
+		Vec3 normal = new Vec3(P).sub(this.center);
 		return normal.normalize(); 
 	}
 	

@@ -3,7 +3,7 @@ package raytracing;
 import java.util.ArrayList;
 import java.util.List;
 import model.Model;
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Represents the raytracing scene.
@@ -17,9 +17,9 @@ public class Scene {
 	
 	private List<LightSource> lightSources;
 	
-	private Vec3f viewerPosition;
+	private Vec3 viewerPosition;
 	
-	public static final Vec3f DEFAULT_VIEWER_POS = new Vec3f(0,0,0);
+	public static final Vec3 DEFAULT_VIEWER_POS = new Vec3(0,0,0);
 	
 	public static final int DEFAULT_SIZE = 100;
 	public static final int DEFAULT_DISTANCE = 1;
@@ -64,7 +64,7 @@ public class Scene {
 	 * @param niv Recursion level for reflections
 	 * @return [R, G, B] color values in range [0, 1]
 	 */
-	public float[] findColor(Vec3f rayStart, Vec3f rayDirection, int niv) {
+	public float[] findColor(Vec3 rayStart, Vec3 rayDirection, int niv) {
 		
 	    double lambdaMin = LAMBDA_MAX;
 	    Model objmin = null;
@@ -72,8 +72,8 @@ public class Scene {
 
 	    // Trouver l'objet d'intersection le plus proche
 	    for (Model m : modelList) {
-	        Vec3f tempStart = new Vec3f(rayStart);
-	        Vec3f tempDirection = new Vec3f(rayDirection);
+	        Vec3 tempStart = new Vec3(rayStart);
+	        Vec3 tempDirection = new Vec3(rayDirection);
 	        double lambda = m.getIntersection(tempStart, tempDirection);
 
 	        if (lambda < lambdaMin && lambda > EPSILON ) {
@@ -85,19 +85,19 @@ public class Scene {
 	    // Si un objet d'intersection est trouvé
 	    if (objmin != null) {
 	    	
-	    	Vec3f c = new Vec3f(); // Initialiser à 0
+	    	Vec3 c = new Vec3(); // Initialiser à 0
 	    	
-	        Vec3f P = new Vec3f(rayStart).add(new Vec3f(rayDirection).scale((float) lambdaMin));
-	        Vec3f normal = objmin.getNormal(P);
+	        Vec3 P = new Vec3(rayStart).add(new Vec3(rayDirection).scale((float) lambdaMin));
+	        Vec3 normal = objmin.getNormal(P);
 
 	        // Vérifier chaque source de lumière
 	        for (LightSource src : lightSources) {
 	        	
-	            Vec3f lightDir = new Vec3f(src.position).sub(P);
+	            Vec3 lightDir = new Vec3(src.position).sub(P);
 	            boolean visible = true;
 	            
-	            Vec3f shadowRayStart = new Vec3f(P);
-                Vec3f shadowRayDir = new Vec3f(lightDir);
+	            Vec3 shadowRayStart = new Vec3(P);
+                Vec3 shadowRayDir = new Vec3(lightDir);
                 
 	            // Vérifier les ombres pour chaque objet
 	            for (Model m : modelList) {
@@ -112,17 +112,17 @@ public class Scene {
 
 	            if (visible) {
 	            	
-	                Vec3f nlightDir = new Vec3f(lightDir).normalize();
+	                Vec3 nlightDir = new Vec3(lightDir).normalize();
 	                
-	                float nDoth = Math.max(new Vec3f(normal).dotProduct(nlightDir), 0);
+	                float nDoth = Math.max(new Vec3(normal).dotProduct(nlightDir), 0);
 	                
-	                Vec3f diffuseColor = new Vec3f(src.color).scale(objmin.getColor().x, objmin.getColor().y, objmin.getColor().z).scale(nDoth);
+	                Vec3 diffuseColor = new Vec3(src.color).scale(objmin.getColor().x, objmin.getColor().y, objmin.getColor().z).scale(nDoth);
 	                
-	                c = new Vec3f(c).add(diffuseColor);
+	                c = new Vec3(c).add(diffuseColor);
 	                
-	                Vec3f specularColor = new Vec3f(src.specular).scale(objmin.getSpecular().x, objmin.getSpecular().y, objmin.getSpecular().z).scale((float) Math.pow(nDoth, objmin.getShininess()));
+	                Vec3 specularColor = new Vec3(src.specular).scale(objmin.getSpecular().x, objmin.getSpecular().y, objmin.getSpecular().z).scale((float) Math.pow(nDoth, objmin.getShininess()));
 	                
-	                c = new Vec3f(c).add(specularColor);
+	                c = new Vec3(c).add(specularColor);
 	                
 	            }
 	        }
@@ -130,10 +130,10 @@ public class Scene {
 	        float reflexionCoeff = objmin.getReflexionCoeff();
 	        
 	        if (niv > 0) {
-	            Vec3f reflectionDir = new Vec3f(rayDirection).sub(new Vec3f(normal).scale(2 * new Vec3f(normal).dotProduct(rayDirection))).normalize();
-	            Vec3f newRayStart = new Vec3f(P);
+	            Vec3 reflectionDir = new Vec3(rayDirection).sub(new Vec3(normal).scale(2 * new Vec3(normal).dotProduct(rayDirection))).normalize();
+	            Vec3 newRayStart = new Vec3(P);
 	            float[] reflectedColor = findColor(newRayStart, reflectionDir, niv - 1);
-	            c = new Vec3f(c).add(new Vec3f(reflectedColor[0], reflectedColor[1], reflectedColor[2]).scale(reflexionCoeff));
+	            c = new Vec3(c).add(new Vec3(reflectedColor[0], reflectedColor[1], reflectedColor[2]).scale(reflexionCoeff));
 	        }
 	        
 	        correctColor(c);
@@ -187,7 +187,7 @@ public class Scene {
 				float x = ( xe - ( width / 2 ) ) / width ;
 				float y = ( ye - ( height / 2 ) ) / width ;
 				
-				Vec3f primaryRayDirection = new Vec3f(x,y,-D);
+				Vec3 primaryRayDirection = new Vec3(x,y,-D);
 				
 				float[] couleur = this.findColor(viewerPosition, primaryRayDirection,5);
 				
@@ -226,7 +226,7 @@ public class Scene {
 	                    float nx = (xe + dx - width / 2) / (float) width;
 	                    float ny = (ye + dy - height / 2) / (float) width;
 
-	                    Vec3f primaryRayDirection = new Vec3f(nx, ny, -D);
+	                    Vec3 primaryRayDirection = new Vec3(nx, ny, -D);
 
 	                    float[] sampleColor = findColor(viewerPosition, primaryRayDirection, 5);
 
@@ -309,7 +309,7 @@ public class Scene {
 	 * 
 	 * @return The viewer position
 	 */
-	public Vec3f getViewerPosition() {
+	public Vec3 getViewerPosition() {
 		return viewerPosition;
 	}
 	
@@ -318,7 +318,7 @@ public class Scene {
 	 * 
 	 * @param that The color vector to clamp
 	 */
-	private void correctColor(Vec3f that) {
+	private void correctColor(Vec3 that) {
 	    that.x = Math.max(0, Math.min(1, that.x));
 	    that.y = Math.max(0, Math.min(1, that.y));
 	    that.z = Math.max(0, Math.min(1, that.z));

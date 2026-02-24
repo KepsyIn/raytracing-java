@@ -1,6 +1,6 @@
 package raytracing;
 
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Represents a point light source in the raytracing scene.
@@ -10,17 +10,17 @@ import utils.Vec3f;
  */
 public class LightSource {
 	
-	public Vec3f ambient;
-	public Vec3f position;
-	public Vec3f diffuse;
-	public Vec3f specular;
-	public Vec3f color;
+	public Vec3 ambient;
+	public Vec3 position;
+	public Vec3 diffuse;
+	public Vec3 specular;
+	public Vec3 color;
 	
-	public static final Vec3f DEFAULT_COLOR = new Vec3f(1,1,1);
-	public static final Vec3f DEFAULT_AMBIENT = new Vec3f(0.2f,0.2f,0.2f);
-	public static final Vec3f DEFAULT_POSITION = new Vec3f(0,0,0);
-	public static final Vec3f DEFAULT_DIFFUSE = new Vec3f(0.8f,0.8f,0.8f);
-	public static final Vec3f DEFAULT_SPECULAR = new Vec3f(1,1,1);
+	public static final Vec3 DEFAULT_COLOR = new Vec3(1,1,1);
+	public static final Vec3 DEFAULT_AMBIENT = new Vec3(0.2f,0.2f,0.2f);
+	public static final Vec3 DEFAULT_POSITION = new Vec3(0,0,0);
+	public static final Vec3 DEFAULT_DIFFUSE = new Vec3(0.8f,0.8f,0.8f);
+	public static final Vec3 DEFAULT_SPECULAR = new Vec3(1,1,1);
 		
 	/**
 	 * Creates a light with all components customized.
@@ -31,7 +31,7 @@ public class LightSource {
 	 * @param diffuse Diffuse component
 	 * @param specular Specular component
 	 */
-	public LightSource(Vec3f color ,Vec3f position, Vec3f ambient, Vec3f diffuse, Vec3f specular) {
+	public LightSource(Vec3 color ,Vec3 position, Vec3 ambient, Vec3 diffuse, Vec3 specular) {
 		this.color = color;
 		this.ambient = ambient;
 		this.position = position;
@@ -53,7 +53,7 @@ public class LightSource {
 	 * @param color The light color
 	 * @param position The 3D position
 	 */
-	public LightSource(Vec3f color , Vec3f position ) {
+	public LightSource(Vec3 color , Vec3 position ) {
 		this(color,position,DEFAULT_AMBIENT,DEFAULT_DIFFUSE,DEFAULT_SPECULAR);
 	}
 
@@ -62,7 +62,7 @@ public class LightSource {
 	 * 
 	 * @return The ambient light color
 	 */
-	public Vec3f getAmbient() {
+	public Vec3 getAmbient() {
 		return ambient;
 	}
 
@@ -71,7 +71,7 @@ public class LightSource {
 	 * 
 	 * @param ambient The ambient light color
 	 */
-	public void setAmbient(Vec3f ambient) {
+	public void setAmbient(Vec3 ambient) {
 		this.ambient = ambient;
 	}
 
@@ -80,7 +80,7 @@ public class LightSource {
 	 * 
 	 * @return The 3D position
 	 */
-	public Vec3f getPosition() {
+	public Vec3 getPosition() {
 		return position;
 	}
 
@@ -89,7 +89,7 @@ public class LightSource {
 	 * 
 	 * @param position The 3D position
 	 */
-	public void setPosition(Vec3f position) {
+	public void setPosition(Vec3 position) {
 		this.position = position;
 	}
 
@@ -98,7 +98,7 @@ public class LightSource {
 	 * 
 	 * @return The diffuse light color vector
 	 */
-	public Vec3f getDiffuse() {
+	public Vec3 getDiffuse() {
 		return diffuse;
 	}
 
@@ -107,7 +107,7 @@ public class LightSource {
 	 * 
 	 * @param diffuse The diffuse light color vector to set
 	 */
-	public void setDiffuse(Vec3f diffuse) {
+	public void setDiffuse(Vec3 diffuse) {
 		this.diffuse = diffuse;
 	}
 
@@ -117,7 +117,7 @@ public class LightSource {
 	 * 
 	 * @return The specular light color vector
 	 */
-	public Vec3f getSpecular() {
+	public Vec3 getSpecular() {
 		return specular;
 	}
 
@@ -126,7 +126,7 @@ public class LightSource {
 	 * 
 	 * @param specular The specular light color vector to set
 	 */
-	public void setSpecular(Vec3f specular) {
+	public void setSpecular(Vec3 specular) {
 		this.specular = specular;
 	}
 
@@ -135,7 +135,7 @@ public class LightSource {
 	 * 
 	 * @return The color vector of the light
 	 */
-	public Vec3f getColor() {
+	public Vec3 getColor() {
 		return color;
 	}
 
@@ -144,7 +144,7 @@ public class LightSource {
 	 * 
 	 * @param color The color vector to set
 	 */
-	public void setColor(Vec3f color) {
+	public void setColor(Vec3 color) {
 		this.color = color;
 	}
 }

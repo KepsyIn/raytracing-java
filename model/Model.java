@@ -1,6 +1,6 @@
 package model;
 
-import utils.Vec3f;
+import utils.Vec3;
 
 /**
  * Abstract base class for 3D models in the raytracing scene.
@@ -9,17 +9,17 @@ import utils.Vec3f;
  */
 public abstract class Model {
 	
-	public Vec3f color;
-	public Vec3f specular;
+	public Vec3 color;
+	public Vec3 specular;
 	public double shininess;
 	
 	public float reflexionCoeff = 0;
 	
-	public static final Vec3f DEFAULT_SPECULAR = new Vec3f(1,1,1);
+	public static final Vec3 DEFAULT_SPECULAR = new Vec3(1,1,1);
 	
-	public static final Vec3f DEFAULT_COLOR = new Vec3f(1,1,1); // white
+	public static final Vec3 DEFAULT_COLOR = new Vec3(1,1,1); // white
 	
-	public Model( Vec3f color ) {
+	public Model( Vec3 color ) {
 		this.color = color;
 		this.specular = DEFAULT_SPECULAR;
 		this.shininess = 100;
@@ -35,16 +35,16 @@ public abstract class Model {
 	 * @param v Ray direction
 	 * @return Intersection distance lambda
 	 */
-	public abstract double getIntersection( Vec3f P , Vec3f v );
+	public abstract double getIntersection( Vec3 P , Vec3 v );
 	
-	public abstract Vec3f getNormal(Vec3f P);
+	public abstract Vec3 getNormal(Vec3 P);
 	
 	/**
 	 * Gets the color.
 	 * 
 	 * @return The RGB color
 	 */
-	public Vec3f getColor() {
+	public Vec3 getColor() {
 		return color;
 	}
 
@@ -53,7 +53,7 @@ public abstract class Model {
 	 * 
 	 * @param color The RGB color
 	 */
-	public void setColor(Vec3f color) {
+	public void setColor(Vec3 color) {
 		this.color = color;
 	}
 
@@ -62,7 +62,7 @@ public abstract class Model {
 	 * 
 	 * @return The specular reflection color
 	 */
-	public Vec3f getSpecular() {
+	public Vec3 getSpecular() {
 		return specular;
 	}
 
@@ -71,7 +71,7 @@ public abstract class Model {
 	 * 
 	 * @param specular The specular reflection color
 	 */
-	public void setSpecular(Vec3f specular) {
+	public void setSpecular(Vec3 specular) {
 		this.specular = specular;
 	}
 
